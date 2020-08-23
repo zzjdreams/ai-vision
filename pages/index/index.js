@@ -1,7 +1,11 @@
 //index.js
+//https://github.com/anrgct/utools-xunfei-ocr/blob/master/src/js/main.js
 //获取应用实例
 const app = getApp()
-var openAi =require('../../utils/openAi')
+var openAi =require('../../utils/openAi');
+var xunfei =require('../../utils/xunfei');
+
+var fsm=wx.getFileSystemManager();
 
 Page({
 
@@ -16,6 +20,18 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var fsm=wx.getFileSystemManager();
+    // var img=fsm.readFileSync('../../images/ocr.jpg','base64');
+    var img=fsm.access({
+      path:'../../images/ocr.jpg',
+      success(res){
+        console.log(res);
+      },
+      fail(res){
+        console.log(res)
+      }
+    });
+    console.log(img);
     
   },
 
@@ -66,5 +82,29 @@ Page({
    */
   onShareAppMessage: function () {
     
+  },
+
+   chooseImg:function(){
+    wx.chooseImage({
+      count:1,
+      success(res){
+        console.log(res.tempFilePaths[0]);
+        var img=fsm.readFileSync(res.tempFilePaths[0],'base64');
+        xunfei.requestUrl(img)
+        // var img=fsm.access({
+        //   path:res.tempFilePaths[0],
+        //   success(res){
+        //    S console.log(res);
+        //   },
+        //   fail(res){
+        //     console.log(res)
+        //   }
+        // });
+        // console.log(img);
+      },
+      fail:(res)=>{
+        console.log(res)
+      }
+    })
   }
 })
