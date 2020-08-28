@@ -8,3 +8,22 @@
   padding: 200rpx 0;
   box-sizing: border-box;
 } 
+
+
+.hover-btn{
+  opacity: 0.7;
+  background-color: darkgrey;
+  scale: 0.8;
+}
+
+
+.wsui-btn__hover_btn {
+  /* //圆形按钮 */
+    opacity: 0.9;
+    transform: scale(0.95, 0.95);
+  /* //长矩形按钮 */
+    position: relative;
+    top: 3rpx;
+    left: 3rpx;
+    box-shadow:0px 0px 8px rgba(0, 0, 0, .1) inset; 
+  }
