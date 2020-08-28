@@ -19,3 +19,32 @@
 .usermotto {
   margin-top: 200px;
 }
+
+.content{
+  display: flex;
+  flex-direction: column;
+}
+
+.line-bg{
+  width: 100%;
+  /* height:300px; */
+  display: flex;
+  background-color: aquamarine;
+  border-bottom: burlywood double 3px;
+  line-height: normal;
+  flex-wrap: wrap;
+}
+
+.line-word{
+  display: flex;
+  flex-wrap: wrap;
+  padding: 3px;
+  color: black;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.imgBox{
+  display: block;
+  width: 100%;
+  height: 100px;
+}

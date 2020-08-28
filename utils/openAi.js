@@ -1,5 +1,6 @@
 var auth = require('./auth.js');
-var strUtil=require('./strUtil')
+var strUtil=require('./strUtil');
+
 
 var appid = '20169';
 var secret_key = 'ggRm3DJfrbev6w8iyUbjBgPRwVA';
@@ -16,10 +17,10 @@ var body = JSON.stringify({
   media_url: 'http://openai.qq.com/docs/pics/bwdemo.jpg'
 });
 var str=strUtil.string2ArrayBuffer(body);
-
 var request=wx.request({
   url: 'http://openai.qq.com/api/json/ai/GetMultiAI',
   method:'POST',
+  port:80,
   header: {
       "Content-Type": "application/json",
       "Content-Length": str.byteLength
@@ -33,3 +34,4 @@ var request=wx.request({
   }
   
 })
+

@@ -61,29 +61,47 @@ function getPostBody() {
 //   form: getPostBody()
 // }
 
+
 export function requestUrl(img){
-  var postBody={
-    image:img
-  }
-  var xunfeiRequest=wx.request({
-    url: config.hostUrl,
-    header:getReqHeader(),
-    data:postBody,
-    success(res){
-      console.log(res);
-    },
-    fail(res){
-      console.log(res);
+  return new Promise((r,j)=>{
+    var postBody={
+      image:img
     }
-  });
-  console.log(getReqHeader())
+    var xunfeiRequest=wx.request({
+      url: config.hostUrl,
+      header:getReqHeader(),
+      data:postBody,
+      method:'POST',
+      success(res){
+        // console.log(res);
+        // console.log(res.data.data.block[0].line);
+        r(res);
+      },
+      fail(res){
+        console.log(res);
+        j(res);
+      }
+    });
+    console.log(getReqHeader())
+  })
+  
 }
-export function upLoadImg(img){
+export function upLoadImg(img,base64){
+  
   wx.uploadFile({
     filePath: img,
     name: 'image',
     url: config.hostUrl,
     header:getReqHeader(),
+    formData:{
+      image:base64
+    },
+    success(res){
+      console.log(res);
+    },
+    fail(res){
+      console.log(res);
+    },
     
   })
 }

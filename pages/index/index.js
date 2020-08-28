@@ -5,6 +5,8 @@ const app = getApp()
 var openAi =require('../../utils/openAi');
 var xunfei =require('../../utils/xunfei');
 
+import {wxPromisify} from '../../utils/wxPromisify'
+
 var fsm=wx.getFileSystemManager();
 
 Page({
@@ -13,25 +15,26 @@ Page({
    * 页面的初始数据
    */
   data: {
-    
+    line:[],
+    imgSrc:'../../images/ocr.jpg'
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var fsm=wx.getFileSystemManager();
-    // var img=fsm.readFileSync('../../images/ocr.jpg','base64');
-    var img=fsm.access({
-      path:'../../images/ocr.jpg',
-      success(res){
-        console.log(res);
-      },
-      fail(res){
-        console.log(res)
-      }
-    });
-    console.log(img);
+    // var fsm=wx.getFileSystemManager();
+    // // var img=fsm.readFileSync('../../images/ocr.jpg','base64');
+    // var img=fsm.access({
+    //   path:'../../images/ocr.jpg',
+    //   success(res){
+    //     console.log(res);
+    //   },
+    //   fail(res){
+    //     console.log(res)
+    //   }
+    // });
+    // console.log(img);
     
   },
 
@@ -85,25 +88,27 @@ Page({
   },
 
    chooseImg:function(){
+     const that=this;
     wx.chooseImage({
       count:1,
       success(res){
         console.log(res.tempFilePaths[0]);
         var img=fsm.readFileSync(res.tempFilePaths[0],'base64');
-        xunfei.requestUrl(img)
-        // var img=fsm.access({
-        //   path:res.tempFilePaths[0],
-        //   success(res){
-        //    S console.log(res);
-        //   },
-        //   fail(res){
-        //     console.log(res)
-        //   }
-        // });
-        // console.log(img);
+        that.data.imgSrc=res.tempFilePaths[0];
+        xunfei.requestUrl(img).then(
+          res=>{
+            console.log(res);
+            that.data.line=res.data.data.block[0].line;
+            
+            that.setData(that.data);
+            that.data.line.forEach(item=>{
+              console.log(item)
+            })
+          },
+          res=>{console.log(res)});
       },
       fail:(res)=>{
-        console.log(res)
+        console.log(res,'识别失败')
       }
     })
   }
