@@ -1,13 +1,4 @@
 const CryptoJS = require('crypto-js')
-// 16530800941
-// 登陆密码
-// 123qwe
-// 支付密码
-// 111111
-
-var appid = '5f40f835';
-var APISecret='704ec3f806a0dcab579842ef991e85ab';
-var APIKey='58ee81bdcc7f8546343b595e888aa74d';
 
 // 系统配置
 const config = {
@@ -24,7 +15,7 @@ const config = {
 }
 
 // 获取当前时间戳
-let ts = parseInt(new Date().getTime() / 1000)
+let ts = parseInt(new Date().getTime() / 1000);
 
 // 组装业务参数
 function getXParamStr() {
@@ -47,27 +38,12 @@ function getReqHeader() {
   }
 }
 
-// 组装postBody
-function getPostBody() {
-  let buffer = fs.readFileSync(config.file)
-  return {
-    image: buffer.toString('base64'),
-  }
-}
-
-// let options = {
-//   url: config.hostUrl,
-//   headers: getReqHeader(),
-//   form: getPostBody()
-// }
-
-
 export function requestUrl(img){
   return new Promise((r,j)=>{
     var postBody={
       image:img
     }
-    var xunfeiRequest=wx.request({
+    wx.request({
       url: config.hostUrl,
       header:getReqHeader(),
       data:postBody,
@@ -82,29 +58,5 @@ export function requestUrl(img){
         j(res);
       }
     });
-    console.log(getReqHeader())
   })
 }
-export function upLoadImg(img,base64){
-  
-  wx.uploadFile({
-    filePath: img,
-    name: 'image',
-    url: config.hostUrl,
-    header:getReqHeader(),
-    formData:{
-      image:base64
-    },
-    success(res){
-      console.log(res);
-    },
-    fail(res){
-      console.log(res);
-    },
-    
-  })
-}
-
-
-
-
