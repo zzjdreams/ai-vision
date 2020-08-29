@@ -1,0 +1,36 @@
+<!--pages/ocrReading/ocrReading.wxml-->
+<view class="suspension tobottom" bindtap="toButtom">去到底部</view>
+<view class="suspension totop" bindtap="toTop">回到顶部</view>
+<view class="title-name">
+  图片预览
+</view>
+<image src="{{imgSrc}}" class="imgBox" mode="widthFix"></image> 
+
+<view class="title-name">
+  内容展示
+</view>
+<view class="content" id="the-id">
+<view class="btn-seletor">
+  <view class="btn" hover-class="hover-btn" >复制</view>
+  <view class="btn" hover-class="hover-btn" >全选</view>
+  <view class="btn" hover-class="hover-btn" >清空</view>
+  <view class="btn" hover-class="hover-btn" >翻译</view>
+</view>
+<view class="line" wx:for="{{line}}" wx:for-item="item" wx:key="i" >
+  <view class="words-unseletor" wx:for="{{item.word}}" wx:for-item="words"  hover-class="hover-btn" 
+    wx:key="j" bindtap="seletorWord" id="{{words.content}}">
+    {{words.content}} 
+  </view>
+</view>
+<view>
+  <textarea  value="{{showText}}" maxlength="3000" fixed="true">
+  </textarea>
+
+  <textarea value="{{translateText}}" maxlength="3000" fixed="true">
+  </textarea>
+</view>
+</view>
+
+<button type="primary" loading="{{showLoading}}" style="margin-top:10px;" bindtap="chooseImg">上传图片</button>
+
+
