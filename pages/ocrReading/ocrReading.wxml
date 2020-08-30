@@ -4,7 +4,7 @@
 <view class="title-name">
   图片预览
 </view>
-<image src="{{imgSrc}}" class="imgBox" mode="widthFix"></image> 
+<image src="{{imgSrc}}" class="imgBox" mode="widthFix" bindtap="chooseImg"></image> 
 
 <view class="title-name">
   内容展示
