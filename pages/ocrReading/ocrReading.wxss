@@ -51,20 +51,37 @@
   width: 95%;
 }
 
-.btn-seletor{
+.btn-box{
   width: 100%;
   margin-bottom: 5px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn-seletor{
+  /* width: 100%; */
+  /* margin-bottom: 5px; */
   display: flex;
   flex-direction: row-reverse;
   border-bottom: #DCDCDC solid 1px;
 }
 
-.btn-seletor .btn{
+.btn{
   font-family: "黑体";
   padding: 3px;
   border: #BDB76B solid 1px;
   color: '#A52A2A';
   margin: 3px;
+}
+
+.btn .transform{
+  display: flex;
+  justify-self: unset;
+  align-self: unset;
+  align-content: unset;
+  position: absolute;
+  left: 0px;
+  justify-self: left;
 }
 
 .line{
