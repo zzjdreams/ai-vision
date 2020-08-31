@@ -1,16 +1,12 @@
-<!--index.wxml-->
-<view>
-  图片预览
-  <image src="{{imgSrc}}" class="imgBox" mode="widthFix"></image>
-</view>
-<view class="content">
-  获取到的文字
-	<view class="line-bg" wx:for="{{line}}" wx:for-item="item" wx:key="index">
-		<text selectable='true' class="line-word" wx:for="{{item.word}}" wx:for-item="words"  hover-class="hover-btn" wx:key="j">
-			{{words.content}}
-		</text>
-	</view>
-</view>
-<view>
-	<button bindtap="chooseImg"  hover-class="hover-btn">choose Image</button>
+<view class="modle" wx:for="{{applictaion}}" wx:key="indexHead" wx:for-item="headItem">
+  <view class="appClassTitle">
+  {{headItem.titleName}}
+  </view>
+  <view class="appClassBody">
+   <view class="itemStyle" wx:for="{{headItem.subApp}}" wx:key="index" wx:for-item="bodyItem" 
+    hover-class="plain-hover" catchtap="callPage" id="{{bodyItem.nav}}">
+    <image class="icon-img" src="{{bodyItem.imgUrl}}"></image>
+    <text class="icon-name">{{bodyItem.appName}}</text>
+  </view>
+  </view>
 </view>

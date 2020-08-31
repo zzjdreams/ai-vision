@@ -2,8 +2,7 @@
 //https://github.com/anrgct/utools-xunfei-ocr/blob/master/src/js/main.js
 //获取应用实例
 const app = getApp()
-var openAi =require('../../utils/openAi');
-var xunfei =require('../../utils/xunfei');
+var xunfei =require('../../xunfeiUtil/handWriting');
 
 import {wxPromisify} from '../../utils/wxPromisify'
 
@@ -15,26 +14,34 @@ Page({
    * 页面的初始数据
    */
   data: {
-    line:[],
-    imgSrc:'../../images/ocr.jpg'
+    applictaion:[
+      {
+        titleName:'文字识别',
+        subApp:[
+          {
+            imgUrl:"",
+            appName:"第一个应用",
+            nav:''
+          }
+        ]
+      }
+    ],
+
+    
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // var fsm=wx.getFileSystemManager();
-    // // var img=fsm.readFileSync('../../images/ocr.jpg','base64');
-    // var img=fsm.access({
-    //   path:'../../images/ocr.jpg',
-    //   success(res){
-    //     console.log(res);
-    //   },
-    //   fail(res){
-    //     console.log(res)
-    //   }
-    // });
-    // console.log(img);
+    wx.showToast({
+      title: '请等一下',
+      duration:3000,
+      icon:"loading",
+      mask:true
+    })
+    this.addApplication();
+    this.jumpNav();
     
   },
 
@@ -87,29 +94,72 @@ Page({
     
   },
 
-   chooseImg:function(){
-     const that=this;
-    wx.chooseImage({
-      count:1,
-      success(res){
-        console.log(res.tempFilePaths[0]);
-        var img=fsm.readFileSync(res.tempFilePaths[0],'base64');
-        that.data.imgSrc=res.tempFilePaths[0];
-        xunfei.requestUrl(img).then(
-          res=>{
-            console.log(res);
-            that.data.line=res.data.data.block[0].line;
-            
-            that.setData(that.data);
-            that.data.line.forEach(item=>{
-              console.log(item)
-            })
+  addApplication:function(){
+    // var applictaion=this.data.applictaion;
+    var applictaion=[
+      {
+        titleName:'文字识别',
+        subApp:[
+          {
+            imgUrl:"https://6464-ddr-ebpze-1259562605.tcb.qcloud.la/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%8A%9F%E8%83%BD%E5%90%88%E9%9B%86/bluetooth.png?sign=3a65fc4ec00dc92fe1cefb0ea55bb823&t=1591519399",
+            appName:"手写体识别",
+            nav:'../ocrReading/ocrReading'          
           },
-          res=>{console.log(res)});
+          {
+            imgUrl:"https://6464-ddr-ebpze-1259562605.tcb.qcloud.la/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%8A%9F%E8%83%BD%E5%90%88%E9%9B%86/bluetooth.png?sign=3a65fc4ec00dc92fe1cefb0ea55bb823&t=1591519399",
+            appName:"手写体识别",
+            nav:'../ocrReading/ocrReading'          
+          },
+        ]
       },
-      fail:(res)=>{
-        console.log(res,'识别失败')
+      {
+        titleName:'图片识别',
+        subApp:[
+          {
+            imgUrl:"https://6464-ddr-ebpze-1259562605.tcb.qcloud.la/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%8A%9F%E8%83%BD%E5%90%88%E9%9B%86/bluetooth.png?sign=3a65fc4ec00dc92fe1cefb0ea55bb823&t=1591519399",
+            appName:"ble蓝牙",
+            nav:''
+          }
+        ]
+      }
+    ]
+    // for(var i in applictaion){
+    //   for(var j in applictaion[i].subApp){
+    //     while(applictaion[i].subApp.length%4!=0){
+    //       applictaion[i].subApp.push({
+    //         imgUrl:"",
+    //         appName:"",
+    //         nav:''
+    //       })
+    //     }
+    //   }
+    // }
+    this.setData({
+      applictaion
+    })
+  },
+  callPage:function(e){
+    console.log(e);
+    wx.setStorage({
+      data: e.currentTarget.id,
+      key: 'nav_url',
+    })
+    wx.navigateTo({
+      url: e.currentTarget.id,
+    })
+  },
+  jumpNav:function(){
+    wx.getStorage({
+      key: 'nav_url',
+      success:function(res){
+        wx.navigateTo({
+          url: res.data,
+        })
+      },
+      fail:function(){
+        console.log('can not jump nav')
       }
     })
-  }
+  },
+
 })
