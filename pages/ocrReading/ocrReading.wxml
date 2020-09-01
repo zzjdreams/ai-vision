@@ -27,10 +27,10 @@
   </view>
 </view>
 <view>
-  <textarea  value="{{showText}}" maxlength="3000" fixed="true" bindinput="textListener">
+  <textarea  value="{{showText}}" maxlength="3000"  bindinput="textListener">
   </textarea>
 
-  <textarea style="border-top:#DCDCDC solid 1px" value="{{translateText}}" maxlength="3000" fixed="true">
+  <textarea style="border-top:#DCDCDC solid 1px" value="{{translateText}}" maxlength="3000" >
   </textarea>
 </view>
 </view>

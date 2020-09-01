@@ -1,7 +1,8 @@
 // pages/ocrReading/ocrReading.js
 //导入手写体识别
 var handWrite = require('../../xunfeiUtil/handWriting');
-var ost=require('../../xunfeiUtil/ots')
+var ost=require('../../xunfeiUtil/ots');
+var logUtil=require('../../utils/logUtil');
 
 const fsm = wx.getFileSystemManager();
 Page({
@@ -299,6 +300,7 @@ Page({
         console.log(res.tempFilePaths[0]);
         var img = fsm.readFileSync(res.tempFilePaths[0], 'base64');
         that.data.imgSrc = res.tempFilePaths[0];
+        logUtil.showLoading('正在上传图片');
         handWrite.requestUrl(img).then(
           res => {
             // console.log(res);
@@ -310,9 +312,11 @@ Page({
                 console.log(item)
               })
             }
+            logUtil.hideLoading();
           },
           res => {
-            console.log(res)
+            console.log(res);
+            logUtil.hideLoading();
           });
       },
       fail: (res) => {
@@ -321,7 +325,8 @@ Page({
       complete: (res) => {
         that.setData({
           showLoading: false
-        })
+        });
+        logUtil.hideLoading();
       }
     })
   },
@@ -393,6 +398,7 @@ Page({
   },
   translateText:function(){
     if(this.data.showText!=''){
+      logUtil.showLoading('翻译中');
       if(this.data.languageInd==0){
         ost.setTransform(this.data.showText,'en','cn');
       }else{
@@ -404,9 +410,11 @@ Page({
           this.setData({
             translateText:res.data.data.result.trans_result.dst
           })
-        }    
+        }   
+        logUtil.hideLoading(); 
       },res=>{
-        console.log(res)
+        console.log(res);
+        logUtil.hideLoading(); 
       })
     }else{
       wx.showToast({
