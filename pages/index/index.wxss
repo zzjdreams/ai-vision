@@ -18,6 +18,8 @@ page{
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-style: normal;
   font-size: large;
+  color: #ccc;          /*设置字体的颜色为灰色*/
+  text-shadow: -1px -1px 1px #000, 1px 1px 3px #fff;
 }
 
 .appClassBody{

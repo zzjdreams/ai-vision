@@ -11,7 +11,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    language:'en->cn',
+    language:'英文->中文',
     languageInd:0,
     line: [{
       "confidence": 1,
@@ -427,10 +427,10 @@ Page({
     var language=this.data.language;
     let languageInd=this.data.languageInd;
     if(languageInd===0){
-      language='cn->en';
+      language='中文->英文';
       languageInd=1;
     }else{
-      language='en->cn';
+      language='英文->中文';
       languageInd=0;
     }
     this.setData({
