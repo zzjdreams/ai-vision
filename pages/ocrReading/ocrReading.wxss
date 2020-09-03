@@ -111,6 +111,7 @@
   border: #BDB76B solid 1px;
   color: black;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  box-shadow: 0 0 0 1px rgba(240, 65, 65, 0.3) inset;
 }
 
 .words-seletor{
@@ -121,6 +122,7 @@
   border: #BDB76B solid 1px;
   color: black;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  box-shadow: 0 0 0 1px hsla(240,0%,100%,.3) inset;
 }
 
 

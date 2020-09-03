@@ -317,10 +317,12 @@ Page({
           res => {
             console.log(res);
             logUtil.hideLoading();
+            logUtil.showToast('文件上传失败');
           });
       },
       fail: (res) => {
-        console.log(res, '识别失败')
+        console.log(res, '识别失败');
+        logUtil.showToast('文件选择失败');
       },
       complete: (res) => {
         that.setData({
@@ -405,15 +407,17 @@ Page({
         ost.setTransform(this.data.showText,'cn','en');
       }
       ost.requestUrl().then((res)=>{
-        console.log(res);
+        logUtil.log(res);
         if(res.data.data){
           this.setData({
             translateText:res.data.data.result.trans_result.dst
           })
+          logUtil.showToast('翻译成功');
         }   
         logUtil.hideLoading(); 
       },res=>{
         console.log(res);
+        logUtil.showToast('翻译失败');
         logUtil.hideLoading(); 
       })
     }else{
