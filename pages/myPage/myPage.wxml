@@ -1,0 +1,7 @@
+<!--pages/myPage/myPage.wxml-->
+<zzj-userInfo userIcon="{{userIcon}}" username="{{username}}"
+ welcomeMsg="{{welcomeMsg}}" bind:action="getUserInfo"/>
+
+<view class="toolBox">
+  
+</view>

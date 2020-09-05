@@ -1,0 +1,9 @@
+<!--components/userInfo/userInfo.wxml-->
+
+<view class="userInfo" bindtap="getUserInfo"  open-type="getUserInfo" bindgetuserinfo="getUserInfo">
+  <image class="userIcon" src="{{userIcon}}"/>
+  <view class="userMsg">
+    <view class="userName">{{username}}</view>
+    <view class="welcomeMsg">{{welcomeMsg}}</view>
+  </view>
+</view>

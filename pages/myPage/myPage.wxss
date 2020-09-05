@@ -1,0 +1,12 @@
+/* pages/myPage/myPage.wxss */
+page{
+  background-color: #f6f5ec;
+}
+.toolBox{
+  width: 98%;
+  border-radius: 5px;
+  margin: 0 auto;
+  padding: 3px;
+  background-color: white;
+  height: 100px;
+}

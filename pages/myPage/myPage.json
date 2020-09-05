@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "zzj-userInfo":"/components/userInfo/userInfo"
+  }
+}

@@ -1,0 +1,42 @@
+/* components/userInfo/userInfo.wxss */
+.userInfo{
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+  box-sizing: border-box;
+  /* border-bottom: burlywood 2px solid; */
+}
+
+.userIcon{
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin-right: 10px;
+  border: 2px #8a8a8a solid;
+}
+
+.userMsg{
+  height: 100%;
+  margin-top: 3px;
+  padding-left: 5px;
+  display: flex;
+  flex-direction: column;
+}
+
+.userName{
+  display: flex;
+  justify-self: center;
+  align-items: center;
+  color: black;
+  font-size: 18px;
+}
+
+.welcomeMsg{
+  display: flex;
+  align-items: center;
+  justify-self: center;
+  padding-top: 8px;
+  font-family: "宋体";
+  color: #8a8c8e;
+  font-size: 12px;
+}

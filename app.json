@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/myPage/myPage",
     "pages/ocrReading/ocrReading",
     "pages/logs/logs"
    
@@ -8,8 +9,24 @@
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#FFA500",
-    "navigationBarTitleText": "Weixin",
+    "navigationBarTitleText": "AI-vision",
     "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "list": [{
+      "pagePath": "pages/index/index",
+      "text": "首页",
+      "iconPath": "./images/tabBar/app_unseletor.png",
+      "selectedIconPath": "./images/tabBar/app_seletor.png"
+    },
+    {
+      "pagePath": "pages/myPage/myPage",
+      "text": "我的",
+      "iconPath": "./images/tabBar/my_unseletor.png",
+      "selectedIconPath": "./images/tabBar/my_seletor.png"
+    }],
+    "color":"#666666",
+    "selectedColor":"#FFA500"
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json"
