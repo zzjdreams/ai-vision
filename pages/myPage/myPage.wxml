@@ -1,7 +1,17 @@
 <!--pages/myPage/myPage.wxml-->
-<zzj-userInfo userIcon="{{userIcon}}" username="{{username}}"
- welcomeMsg="{{welcomeMsg}}" bind:action="getUserInfo"/>
-
+<zzj-userInfo userIcon="{{userIcon}}" username="{{username}}" welcomeMsg="{{welcomeMsg}}" bind:action="getUserInfo" />
+<text class="tv-msg">长按进行删除</text> 
 <view class="toolBox">
-  
+	<block wx:for="{{dbInfo}}" wx:key="id">
+		<view class="boxTag {{longPress?'deletItem':''}}" bindlongpress="delFun">
+			<icon class="deletTag" type="cancel" size="30" color="#e0861a" hidden="{{!longPress}}"/>
+			<text class="tv-name">{{item.type==0?'手写体识别':'翻译识别'}}</text>
+			<scroll-view class="sv" scroll-x="true" scroll-y="true">
+				<text class="tv-source">{{item.source}}</text>
+			</scroll-view>
+			<scroll-view class="sv" scroll-x="true" scroll-y="true">
+				<text class="tv-destination">{{item.destination}}</text>
+			</scroll-view>
+		</view>
+	</block>
 </view>

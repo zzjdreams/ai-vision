@@ -3,7 +3,7 @@
 var handWrite = require('../../xunfeiUtil/handWriting');
 var ost=require('../../xunfeiUtil/ots');
 var logUtil=require('../../utils/logUtil');
-
+const app=getApp();
 const fsm = wx.getFileSystemManager();
 Page({
 
@@ -291,6 +291,7 @@ Page({
 
   chooseImg: function () {
     const that = this;
+    var fileID=null;
     that.setData({
       showLoading: true
     })
@@ -300,17 +301,41 @@ Page({
         console.log(res.tempFilePaths[0]);
         var img = fsm.readFileSync(res.tempFilePaths[0], 'base64');
         that.data.imgSrc = res.tempFilePaths[0];
+        console.log(res) 
         logUtil.showLoading('正在上传图片');
         handWrite.requestUrl(img).then(
           res => {
             // console.log(res);
             if (res.data.data) {
-
+              logUtil.showToast('识别成功');
               that.data.line = res.data.data.block[0].line;
               that.setData(that.data);
               that.data.line.forEach(item => {
-                console.log(item)
-              })
+                // console.log(item)
+              });
+              if( app.cloudParameter.db){
+                wx.cloud.uploadFile({
+                  cloudPath:`ocrImg/${new Date().valueOf()}.png`,
+                  filePath: that.data.imgSrc,
+                  success(res){
+                    console.log(res);
+                    fileID=res.fileID;
+                    app.cloudParameter.collection.add({
+                      data:{
+                        openid:app.globalData.userMsg.openid,
+                        date:new Date(),
+                        type:0,
+                        source:fileID,
+                        destination:JSON.stringify(that.data.line)
+                      }
+                    });
+                  },
+                  fail(res){
+                    console.log(res)
+                  }
+                })
+               
+              }
             }
             logUtil.hideLoading();
           },
@@ -399,6 +424,7 @@ Page({
     })
   },
   translateText:function(){
+    const that=this;
     if(this.data.showText!=''){
       logUtil.showLoading('翻译中');
       if(this.data.languageInd==0){
@@ -411,7 +437,18 @@ Page({
         if(res.data.data){
           this.setData({
             translateText:res.data.data.result.trans_result.dst
-          })
+          });
+          if(wx.cloud){
+            app.cloudParameter.collection.add({
+              data:{
+                openid:app.globalData.userMsg.openid,
+                date:new Date(),
+                type:1,
+                source:that.data.showText,
+                destination:that.data.translateText
+              }
+            });
+          }
           logUtil.showToast('翻译成功');
         }   
         logUtil.hideLoading(); 

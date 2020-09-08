@@ -1,12 +1,118 @@
 /* pages/myPage/myPage.wxss */
-page{
+page {
   background-color: #f6f5ec;
 }
-.toolBox{
+
+.toolBox {
   width: 98%;
   border-radius: 5px;
   margin: 0 auto;
   padding: 3px;
   background-color: white;
+}
+
+text {
+  /* 超出一行文字自动隐藏 */
+  /* overflow:hidden;  */
+  /* 文字隐藏后添加省略号 */
+  /* text-overflow:ellipsis; */
+  /* 强制不换行 */
+
+  /* white-space:nowrap;   */
+  display: block;
+  margin: 3px;
+}
+
+.tv-msg{
+  color: rgb(192, 175, 175);
+  /*设置字体的颜色为灰色*/
+  text-shadow: -1px -1px 1px rgb(212, 212, 212), 1px 1px 3px #fff;
+}
+
+.tv-name {
+  color: rgb(243, 124, 124);
+  border-bottom: dotted 1px #4f5555;
+  /*设置字体的颜色为灰色*/
+  text-shadow: -1px -1px 1px rgb(236, 150, 150), 1px 1px 3px #fff;
+}
+
+/* .text-source{
+  height: 10px;
+  text-overflow: ellipsis;
+  white-space: normal;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+ .text-destination{
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp:3;
+  overflow: hidden;
+  word-break: break-all;
+  text-overflow: ellipsis;
+} */
+
+.sv {
+  width: 100%;
   height: 100px;
+  padding: 5px;
+  border-bottom: double #c37e00 2px;
+}
+
+/* .text-source,.text-destination{
+  
+} */
+
+
+
+.boxTag {
+  width: 90%;
+  position: relative;
+  background: #fffef9;
+  border-radius: 5px;
+  padding: 3px;
+  margin: 0 auto 5px auto;
+  box-sizing: border-box;
+  border: #ffce7b dashed 3px;
+}
+
+.deletItem{
+  animation: del-dou 1s 0s 3;
+}
+
+.deletTag {
+  position: absolute;
+  top: 0;
+  right: 0;
+  text-align: center;
+}
+
+@keyframes del-dou{
+  0%{
+    transform: rotate(0deg);
+  }
+  10%{
+    transform: rotate(-4deg);
+  }
+  15%{
+    transform: rotate(4deg);
+  }
+  20%{
+    transform: rotate(-8deg);
+  }
+  25%{
+    transform: rotate(8deg);
+  }
+  30%{
+    transform: rotate(-4deg);
+  }
+  35%{
+    transform: rotate(4deg);
+  }
+  40%{
+    transform: rotate(0deg);
+  }
 }

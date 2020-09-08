@@ -1,9 +1,5 @@
 const CryptoJS = require('crypto-js')
-// 16530800941
-// 登陆密码
-// 123qwe
-// 支付密码
-// 111111
+
 
 var appid = '5f40f835';
 var APISecret='704ec3f806a0dcab579842ef991e85ab';

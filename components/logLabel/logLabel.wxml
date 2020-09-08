@@ -1,0 +1,8 @@
+<!--components/logLabel/logLabel.wxml-->
+<view labelTag="{{labelTag}}">
+  <view>X</view>
+  <text></text>
+  <text></text>
+  <text></text>
+  <text></text>
+</view>

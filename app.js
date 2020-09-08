@@ -1,4 +1,5 @@
 //app.js
+
 App({
   onLaunch: function () {
     // 展示本地存储能力
@@ -10,6 +11,25 @@ App({
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
+        console.log('用户信息:'+ res.code);
+        wx.request({
+          url: 'https://api.weixin.qq.com/sns/jscode2session?appid=APPID&secret=SECRET&js_code=JSCODE&grant_type=authorization_code',
+          method:'GET',
+          data:{
+            appid:'wx5f037b7ad8d5228d',
+            secret:'ed8cf5efa72f8192ef2dfab1c71c2c03',
+            js_code:res.code,
+            grant_type:'authorization_code'
+          },
+          success:res=>{
+            // console.log('success',res);
+            this.globalData.userMsg=res.data;
+            // console.log(this.globalData.userMsg)
+          },
+          fail(res){
+            console.log('fail',res)
+          }
+        })
       }
     })
     // 获取用户信息
@@ -32,8 +52,26 @@ App({
         }
       }
     })
+    // if(wx.canIUse('cloud')){
+      wx.cloud.init({
+        env:'yun-r0zzt',
+        traceUser:true
+      });
+      this.cloudParameter.db=wx.cloud.database();
+      this.cloudParameter.collection=this.cloudParameter.db.collection('xunfei_collection');
+    // }else{
+    //  wx.showToast({
+    //    title: '请更新微信版本,\n否则部分功能不可用',
+    //    icon:'none'
+    //  })
+    // }
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    userMsg:null
+  },
+  cloudParameter:{
+    db:null,
+    collection:null
   }
 })
