@@ -2,9 +2,9 @@
 <zzj-userInfo userIcon="{{userIcon}}" username="{{username}}" welcomeMsg="{{welcomeMsg}}" bind:action="getUserInfo" />
 <text class="tv-msg">长按进行删除</text> 
 <view class="toolBox">
-	<block wx:for="{{dbInfo}}" wx:key="id">
-		<view class="boxTag {{longPress?'deletItem':''}}" bindlongpress="delFun">
-			<icon class="deletTag" type="cancel" size="30" color="#e0861a" hidden="{{!longPress}}"/>
+	<block wx:for="{{dbInfo}}" wx:key="_id">
+		<view class="boxTag {{longPress?'deletItem':''}}" bindlongpress="delFun" id="{{item._id}}">
+			<icon class="deletTag" type="cancel" size="30" color="#e0861a" hidden="{{!longPress}}" bindtap="delDb" id="{{item._id}}"/>
 			<text class="tv-name">{{item.type==0?'手写体识别':'翻译识别'}}</text>
 			<scroll-view class="sv" scroll-x="true" scroll-y="true">
 				<text class="tv-source">{{item.source}}</text>
