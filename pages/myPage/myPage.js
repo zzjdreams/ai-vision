@@ -7,6 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    showBox:false,
     longPress:false,
     userIcon:'../../images/userInfo/userIcon.png',
     username:'点击头像进行登录',
@@ -14,7 +15,8 @@ Page({
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    dbInfo:null
+    dbInfo:null,
+    imgSrc:''
   },
 
   /**
@@ -155,10 +157,10 @@ Page({
         longPress:false
       })
     },10000);
-    console.log(e)
+    // console.log(e)
   },
   delDb:function(e){
-    console.log(e.currentTarget.id);
+    // console.log(e.currentTarget.id);
     app.cloudParameter.collection.doc(e.currentTarget.id)
     .remove()
     .then(()=>{
@@ -169,6 +171,20 @@ Page({
     .catch(()=>{
       logUtil.showModal('数据情况','删除失败');
       // console.log('删除失败');
+    })
+  },
+  openImg(e){
+    // console.log(e)
+    if(e.currentTarget.dataset.type==0){
+      this.setData({
+        imgSrc:e.currentTarget.dataset.text,
+        showBox:true
+      })
+    }
+  },
+  closeImg(){
+    this.setData({
+      showBox:false
     })
   }
 })

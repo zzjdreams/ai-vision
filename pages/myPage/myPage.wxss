@@ -1,6 +1,7 @@
 /* pages/myPage/myPage.wxss */
 page {
   background-color: #f6f5ec;
+  height: 100%;
 }
 
 .toolBox {
@@ -115,4 +116,23 @@ text {
   40%{
     transform: rotate(0deg);
   }
+}
+
+.imgBox{
+  width: 100%;
+  height: 100%;
+  z-index: 20;
+  background-color: gray;
+  position: fixed;
+  /* opacity: 0.5; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.showImg{
+  width: 100%;
+  height: 200rpx;
+  position: fixed;
+  z-index: 999;
 }

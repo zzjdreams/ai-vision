@@ -318,7 +318,7 @@ Page({
                   cloudPath:`ocrImg/${new Date().valueOf()}.png`,
                   filePath: that.data.imgSrc,
                   success(res){
-                    console.log(res);
+                    // console.log(that.analyzeLine(that.data.line));
                     fileID=res.fileID;
                     app.cloudParameter.collection.add({
                       data:{
@@ -326,7 +326,7 @@ Page({
                         date:new Date(),
                         type:0,
                         source:fileID,
-                        destination:JSON.stringify(that.data.line)
+                        destination:that.analyzeLine(that.data.line)
                       }
                     });
                   },
@@ -416,6 +416,17 @@ Page({
       showText
     })
 
+  },
+
+  analyzeLine:function(lines){
+    var showText='';
+    for(var i in lines){
+      for(var j in lines[i].word){
+        showText=showText+ lines[i].word[j].content+' ';
+      }
+      showText+='\r\n';
+    }
+    return showText;
   },
   clearText:function(){
     this.setData({

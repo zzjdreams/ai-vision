@@ -1,4 +1,8 @@
 <!--pages/myPage/myPage.wxml-->
+<view class="imgBox" style="display:{{showBox?'flex':'none'}}" bindtap="closeImg">
+<image src="{{imgSrc}}" class="showImg" mode="widthFix" style="display:{{showBox}}"/>
+
+</view>
 <zzj-userInfo userIcon="{{userIcon}}" username="{{username}}" welcomeMsg="{{welcomeMsg}}" bind:action="getUserInfo" />
 <text class="tv-msg">长按进行删除</text> 
 <view class="toolBox">
@@ -7,10 +11,10 @@
 			<icon class="deletTag" type="cancel" size="30" color="#e0861a" hidden="{{!longPress}}" bindtap="delDb" id="{{item._id}}"/>
 			<text class="tv-name">{{item.type==0?'手写体识别':'翻译识别'}}</text>
 			<scroll-view class="sv" scroll-x="true" scroll-y="true">
-				<text class="tv-source">{{item.source}}</text>
+				<text selectable="true" class="tv-source"  data-text="{{item.source}}" data-type="{{item.type}}" catchtap="openImg">{{item.source}}</text>
 			</scroll-view>
 			<scroll-view class="sv" scroll-x="true" scroll-y="true">
-				<text class="tv-destination">{{item.destination}}</text>
+				<text class="tv-destination" selectable="true" data-text="{{item.destination}}">{{item.destination}}</text>
 			</scroll-view>
 		</view>
 	</block>
