@@ -228,7 +228,6 @@ Page({
       }]
     }],
     imgSrc: '../../images/ocr.jpg',
-    showLoading: false,
     showText: "",
     translateText: ""
   },
@@ -292,9 +291,7 @@ Page({
   chooseImg: function () {
     const that = this;
     var fileID=null;
-    that.setData({
-      showLoading: true
-    })
+    logUtil.showLoading('正在上传图片');
     wx.chooseImage({
       count: 1,
       success(res) {
@@ -302,12 +299,14 @@ Page({
         var img = fsm.readFileSync(res.tempFilePaths[0], 'base64');
         that.data.imgSrc = res.tempFilePaths[0];
         console.log(res) 
-        logUtil.showLoading('正在上传图片');
+        logUtil.hideLoading();
+        logUtil.showToast('图片加载成功');
         handWrite.requestUrl(img).then(
           res => {
             // console.log(res);
             if (res.data.data) {
-              logUtil.showToast('识别成功');
+              logUtil.hideLoading();
+              logUtil.showToast('图片识别成功');
               that.data.line = res.data.data.block[0].line;
               that.setData(that.data);
               that.data.line.forEach(item => {
@@ -331,13 +330,12 @@ Page({
                     });
                   },
                   fail(res){
-                    console.log(res)
+                    console.log(res);
                   }
                 })
                
               }
             }
-            logUtil.hideLoading();
           },
           res => {
             console.log(res);
@@ -346,14 +344,9 @@ Page({
           });
       },
       fail: (res) => {
+        logUtil.hideLoading();
         console.log(res, '识别失败');
         logUtil.showToast('文件选择失败');
-      },
-      complete: (res) => {
-        that.setData({
-          showLoading: false
-        });
-        logUtil.hideLoading();
       }
     })
   },
