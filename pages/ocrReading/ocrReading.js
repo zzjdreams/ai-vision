@@ -291,7 +291,6 @@ Page({
   chooseImg: function () {
     const that = this;
     var fileID=null;
-    logUtil.showLoading('正在上传图片');
     wx.chooseImage({
       count: 1,
       success(res) {
@@ -299,8 +298,8 @@ Page({
         var img = fsm.readFileSync(res.tempFilePaths[0], 'base64');
         that.data.imgSrc = res.tempFilePaths[0];
         console.log(res) 
-        logUtil.hideLoading();
         logUtil.showToast('图片加载成功');
+        logUtil.showLoading('图片上传中...')
         handWrite.requestUrl(img).then(
           res => {
             // console.log(res);
@@ -333,7 +332,6 @@ Page({
                     console.log(res);
                   }
                 })
-               
               }
             }
           },
@@ -344,8 +342,6 @@ Page({
           });
       },
       fail: (res) => {
-        logUtil.hideLoading();
-        console.log(res, '识别失败');
         logUtil.showToast('文件选择失败');
       }
     })
