@@ -129,18 +129,31 @@ Page({
   },
     queryDb:function(){
     if(wx.cloud){
-      console.log('openid',app.globalData.userMsg)
-       app.cloudParameter.collection.where({
-        openid:app.globalData.userMsg.openid
-      }).orderBy(
+      //  app.cloudParameter.collection.where({
+      //   openid:app.globalData.userMsg.openid
+      // }).orderBy(
+      //   "date","desc"
+      // ).get()
+      // .then(res=>{
+      //   // console.log(res.data);
+      //   this.setData(({
+      //     dbInfo:res.data
+      //   }))
+      // // console.log(JSON.stringify(this.data.dbInfo) )
+      // })
+      // .catch(res=>{
+      //   console.log(res);
+      // })
+
+      app.cloudParameter.collection.orderBy(
         "date","desc"
       ).get()
       .then(res=>{
-        console.log(res.data);
+        // console.log(res.data);
         this.setData(({
           dbInfo:res.data
         }))
-      console.log(JSON.stringify(this.data.dbInfo) )
+      // console.log(JSON.stringify(this.data.dbInfo) )
       })
       .catch(res=>{
         console.log(res);

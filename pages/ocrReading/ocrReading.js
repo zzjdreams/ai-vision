@@ -321,7 +321,7 @@ Page({
                     fileID=res.fileID;
                     app.cloudParameter.collection.add({
                       data:{
-                        openid:app.globalData.userMsg.openid,
+                        // openid:app.globalData.userMsg.openid,
                         date:new Date(),
                         type:0,
                         source:fileID,
@@ -445,7 +445,7 @@ Page({
           if(wx.cloud){
             app.cloudParameter.collection.add({
               data:{
-                openid:app.globalData.userMsg.openid,
+                // openid:app.globalData.userMsg.openid,
                 date:new Date(),
                 type:1,
                 source:that.data.showText,

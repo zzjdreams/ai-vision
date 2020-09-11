@@ -11,25 +11,8 @@ App({
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
-        console.log('用户信息:'+ res.code);
-        wx.request({
-          url: 'https://api.weixin.qq.com/sns/jscode2session?appid=APPID&secret=SECRET&js_code=JSCODE&grant_type=authorization_code',
-          method:'GET',
-          data:{
-            appid:'wx5f037b7ad8d5228d',
-            secret:'ed8cf5efa72f8192ef2dfab1c71c2c03',
-            js_code:res.code,
-            grant_type:'authorization_code'
-          },
-          success:res=>{
-            // console.log('success',res);
-            this.globalData.userMsg=res.data;
-            // console.log(this.globalData.userMsg)
-          },
-          fail(res){
-            console.log('fail',res)
-          }
-        })
+        // console.log('用户信息:'+ res.code);
+        
       }
     })
     // 获取用户信息
