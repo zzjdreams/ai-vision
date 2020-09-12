@@ -14,7 +14,7 @@ Page({
     welcomeMsg:'欢迎您的使用',
     userInfo: {},
     hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    // canIUse: wx.canIUse('button.open-type.getUserInfo'),
     dbInfo:null,
     imgSrc:''
   },
@@ -112,19 +112,31 @@ Page({
     //   userInfo: e.detail.userInfo,
     //   hasUserInfo: true
     // })
-    if (app.globalData.userInfo){
-      wx.getUserInfo({
-        success:res=>{
-          app.globalData.userInfo = e.detail.userInfo;
-          this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true,
-            userIcon:res.userInfo.avatarUrl,
-            username:res.userInfo.nickName
-          })
+    wx.getSetting({
+      success: res => {
+        if (res.authSetting['scope.userInfo']) {
+          // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
+
+          if (!app.globalData.userInfo){
+            wx.getUserInfo({
+              success:res=>{
+                app.globalData.userInfo =  res.userInfo;
+                this.setData({
+                  userInfo: res.userInfo,
+                  hasUserInfo: true,
+                  userIcon:res.userInfo.avatarUrl,
+                  username:res.userInfo.nickName
+                })
+              },fail(res){
+                logUtil.log(res)
+              }
+            })
+          }
         }
-      })
-    }
+      },fail(res){
+        console.log(res);
+      }
+    })
    
   },
     queryDb:function(){

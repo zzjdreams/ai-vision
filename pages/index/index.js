@@ -101,12 +101,16 @@ Page({
         titleName:'文字识别',
         subApp:[
           {
+
             imgUrl:"https://6464-ddr-ebpze-1259562605.tcb.qcloud.la/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%8A%9F%E8%83%BD%E5%90%88%E9%9B%86/OCR.png?sign=1df2decffba49a99d40261a43048e5c9&t=1599131210",
+
             appName:"手写体识别",
             nav:'../ocrReading/ocrReading'          
           },
           // {
+
           //   imgUrl:"https://6464-ddr-ebpze-1259562605.tcb.qcloud.la/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%8A%9F%E8%83%BD%E5%90%88%E9%9B%86/bluetooth.png?sign=3a65fc4ec00dc92fe1cefb0ea55bb823&t=1591519399",
+
           //   appName:"手写体识别",
           //   nav:'../ocrReading/ocrReading'          
           // },

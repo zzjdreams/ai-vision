@@ -1,9 +1,12 @@
 /* components/userInfo/userInfo.wxss */
 .userInfo{
-  display: flex;
-  flex-direction: row;
-  padding: 10px;
-  box-sizing: border-box;
+  display: flex  !important; 
+  flex-direction: row  !important;
+  padding: 10px  !important;
+  box-sizing: border-box  !important;
+  width: 750rpx !important;
+  background-color: #f6f5ec !important; 
+
   /* border-bottom: burlywood 2px solid; */
 }
 
