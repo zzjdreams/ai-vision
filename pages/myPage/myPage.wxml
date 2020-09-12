@@ -1,10 +1,16 @@
 <!--pages/myPage/myPage.wxml-->
 <view class="imgBox" style="display:{{showBox?'flex':'none'}}" bindtap="closeImg">
-<image src="{{imgSrc}}" class="showImg" mode="widthFix" style="display:{{showBox}}"/>
+<image src="{{imgSrc}}" class="showImg" mode="widthFix" 
+	style="display:{{showBox}}"	show-menu-by-longpress="{{true}}"/>
 
 </view>
 <zzj-userInfo userIcon="{{userIcon}}" username="{{username}}" welcomeMsg="{{welcomeMsg}}" bind:action="getUserInfo" />
-<text class="tv-msg">长按进行删除</text> 
+<text class="tv-msg" wx:if="{{dbInfo.length!=0}}">长按进行删除</text> 
+<text class="tv-msg" wx:else>当前无数据</text> 
+<block wx:if="{{ !userInfo }}">
+	<text class="tv-msg">请先授权登录才能查看数据哦🐷</text> 
+</block>
+<block wx:else>
 <view class="toolBox">
 	<block wx:for="{{dbInfo}}" wx:key="_id">
 		<view class="boxTag {{longPress?'deletItem':''}}" bindlongpress="delFun" id="{{item._id}}">
@@ -19,3 +25,5 @@
 		</view>
 	</block>
 </view>
+</block>
+

@@ -46,54 +46,8 @@ Page({
   },
 
   /**
-   * 生命周期函数--监听页面初次渲染完成
+   * 添加原因到列表中
    */
-  onReady: function () {
-    
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-    
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-    
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-    
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-    
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-    
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-    
-  },
-
   addApplication:function(){
     // var applictaion=this.data.applictaion;
     var applictaion=[
@@ -142,6 +96,7 @@ Page({
       applictaion
     })
   },
+  //打开原因后保存应用路径
   callPage:function(e){
     console.log(e);
     wx.setStorage({
@@ -152,6 +107,7 @@ Page({
       url: e.currentTarget.id,
     })
   },
+  //再次打开原因后自动跳转到应用中
   jumpNav:function(){
     wx.getStorage({
       key: 'nav_url',

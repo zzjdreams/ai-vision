@@ -12,10 +12,10 @@ Page({
     userIcon:'../../images/userInfo/userIcon.png',
     username:'点击头像进行登录',
     welcomeMsg:'欢迎您的使用',
-    userInfo: {},
+    userInfo: null,
     hasUserInfo: false,
-    // canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    dbInfo:null,
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    dbInfo:[],
     imgSrc:''
   },
 
@@ -55,7 +55,9 @@ Page({
         }
       })
     }
-    this.queryDb();
+    if(this.data.userInfo){
+      this.queryDb();
+    }
   },
 
   /**
@@ -89,7 +91,10 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    this.queryDb();
+    if(this.data.userInfo){
+      this.queryDb();
+    }
+    this.setData(this.data);
   },
 
   /**
@@ -127,6 +132,7 @@ Page({
                   userIcon:res.userInfo.avatarUrl,
                   username:res.userInfo.nickName
                 })
+                this.queryDb();
               },fail(res){
                 logUtil.log(res)
               }
@@ -173,6 +179,7 @@ Page({
     }
     
   },
+  //监听长按事件，显示删除按钮
   delFun:function(e){
     this.setData({
       longPress:true
@@ -184,6 +191,7 @@ Page({
     },10000);
     // console.log(e)
   },
+  //删除数据库中的记录
   delDb:function(e){
     // console.log(e.currentTarget.id);
     app.cloudParameter.collection.doc(e.currentTarget.id)
@@ -198,6 +206,7 @@ Page({
       // console.log('删除失败');
     })
   },
+  //打开列表中的图片
   openImg(e){
     // console.log(e)
     if(e.currentTarget.dataset.type==0){
